@@ -7,23 +7,27 @@
 <body>
 	<p>
 		<?php 
-			$hostname = "localhost";
-			$username = "root";
+			$dsn = "mysql:dbname=test;host=localhost;charset=utf8";
+			$user = "root";
 			$password = "root";
-			$dbname = "test";
+			try{
+				$dbh = new PDO($dsn, $user, $password);
+				print("接続に成功しました。<br>");
 
-			$connect = mysql_connect($hostname, $username, $password);
-			mysql_select_db($dbname);
+				$sql = "select * from test_tab";
 
-			$sql = "select * from test_tab";
-			$sqlq = mysql_query($sql,$connect);
+				foreach($dbh -> query($sql) as $row){
+					print($row['coll'].'<br>');
+				}
+				$sql = "insert into test_tab (coll) values(:coll)";
+				$stmt = $dbh -> prepare($sql);
+				$stmt -> bindValue(':coll', 100 , PDO::PARAM_INT);
+				$stmt -> execute();
 
-			while($row = mysql_fetch_array($sqlq)){
-				print $row['coll'];
-				} 
-
-			mysql_free_result($sqlq);
-			mysql_close($connect);
+				$dbh = null;
+			}catch(PDOException $e){
+				print("error");
+			}
 		?>
 	</p>
 </body>
