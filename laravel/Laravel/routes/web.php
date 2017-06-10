@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('helo', 'HeloController');
+
+Route::get('/test/data={id}', function($id){
+	return 'User '.$id;
+});
