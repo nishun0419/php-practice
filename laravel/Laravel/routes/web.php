@@ -25,6 +25,11 @@ Route::get('helo/update', 'HeloController@getUpdate');
 Route::post('helo/update', 'HeloController@postUpdate');
 
 Route::get('helo/delete', 'HeloController@getDelete');
-Route::get('/test/data={id}', function($id){
-	return 'User '.$id;
+
+Route::get('blade', function(){
+	return view('child');
+});
+
+Route::get('alert', function(){
+	return view('alert');
 });
