@@ -5,6 +5,7 @@
 	<title>アプリ名 - @yield('title')</title>
 </head>
 <body>
+	<h1> @yield('title')</h1>
 	@section('sidebar')
 		ここがメインのサイドバー
 	@show

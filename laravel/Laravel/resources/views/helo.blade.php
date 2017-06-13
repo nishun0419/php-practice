@@ -12,21 +12,17 @@
 </head>
 <body>
 	<h1>Sample</h1>
-	<p>
-		<?php
-			echo $message;
-		?>
-	</p>
+	<p>{{ $message }}</p>
 	<table>
 		<tr><th>ID</th><th>NAME</th><th>MAIL</th><th>AGE</th></tr>
-		<?php foreach($data as $val){ ?>
+		@foreach($data as $val)
 		<tr>
-			<td><?php echo $val -> id; ?></td>
-			<td><?php echo $val -> name; ?></td>
-			<td><?php echo $val -> mail; ?></td>
-			<td><?php echo $val -> age; ?></td>
+			<td>{{ $val -> id }}</td>
+			<td>{{ $val -> name }}</td>
+			<td>{{ $val -> mail }}</td>
+			<td>{{ $val -> age }}</td>
 		</tr>
-		<?php } ?>
+		@endforeach
 	</table>
 </body>
 </html>
