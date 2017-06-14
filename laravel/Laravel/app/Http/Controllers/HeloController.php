@@ -11,7 +11,12 @@ class HeloController extends Controller
 {
     public function index(Request $request){
     	$data = MyTable::all();
-    	return view('helo', ['message' => 'Mytable List', 'data' => $data]);
+        if(count($data) > 0){
+            $msg = 'Mytable List';
+        }else{
+            $msg = 'No Data';
+        }
+    	return view('helo', ['message' => $msg, 'data' => $data]);
     }
 
     public function postIndex(Request $request){
