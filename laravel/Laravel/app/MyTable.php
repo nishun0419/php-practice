@@ -8,5 +8,4 @@ class MyTable extends Model
 {
    protected $table = 'Mytable'; //
    protected $guarded = array('id');
-   public $timestamps = false;
 }

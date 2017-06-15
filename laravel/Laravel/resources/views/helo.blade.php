@@ -15,16 +15,18 @@
 	<p>{{ $message }}</p>
 	@if(count($data) > 0)
 	<table>
-		<tr><th>ID</th><th>NAME</th><th>MAIL</th><th>AGE</th></tr>
+		<tr><th>ID</th><th>NAME</th><th>MAIL</th><th>AGE</th><th> </th></tr>
 		@foreach($data as $val)
 		<tr>
-			<td>{{ $val -> id }}</td>
+			<td><a href="/helo/update?id={{ $val -> id }}">{{ $val -> id }}</a></td>
 			<td>{{ $val -> name }}</td>
 			<td>{{ $val -> mail }}</td>
 			<td>{{ $val -> age }}</td>
+			<td><a href="/helo/delete?id={{ $val -> id }}">X</a></td>
 		</tr>
 		@endforeach
 	</table>
 	@endif
+	<a href="/helo/new">新規作成</a>
 </body>
 </html>

@@ -21,7 +21,7 @@ Route::post('helo', 'HeloController@postIndex');
 Route::get('helo/new', 'HeloController@getNew');
 Route::post('helo/new', 'HeloController@postNew');
 
-Route::get('helo/update', 'HeloController@getUpdate');
+Route::get('helo/update', 'HeloController@getUpdate'); 
 Route::post('helo/update', 'HeloController@postUpdate');
 
 Route::get('helo/delete', 'HeloController@getDelete');
@@ -33,3 +33,7 @@ Route::get('blade', function(){
 Route::get('alert', function(){
 	return view('alert');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');		//nameは/homeなどのURLの別名をつけるもの
