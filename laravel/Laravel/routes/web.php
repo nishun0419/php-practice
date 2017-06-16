@@ -37,3 +37,8 @@ Route::get('alert', function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');		//nameは/homeなどのURLの別名をつけるもの
+
+//アプリ作成
+Route::get('SNS', 'SNSController@index');
+Route::get('SNS/form', 'SNSController@goForm');
+Route::post('SNS/form', 'SNSController@post');
