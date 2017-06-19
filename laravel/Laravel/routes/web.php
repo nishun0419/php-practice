@@ -42,3 +42,6 @@ Route::get('/home', 'HomeController@index')->name('home');		//nameは/homeなど
 Route::get('SNS', 'SNSController@index');
 Route::get('SNS/form', 'SNSController@goForm');
 Route::post('SNS/form', 'SNSController@post');
+Route::get('SNS/edit', 'SNSController@getEdit');
+Route::post('SNS/edit', 'SNSController@postEdit');
+Route::get('SNS/delete', 'SNSController@delete');

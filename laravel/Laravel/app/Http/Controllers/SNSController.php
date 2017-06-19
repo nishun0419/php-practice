@@ -20,4 +20,26 @@ class SNSController extends Controller
     	MessageTable::create(['message' => $msg]);
     	return redirect() -> action('SNSController@index');
     }
+
+    public function getEdit(Request $request){
+        $id = $request -> id;
+        $data = Messagetable::find($id);
+        return view('SNS.edit', ['data' => $data]);
+    }
+
+    public function postEdit(Request $request){
+        $id = $request -> id;
+        $data = Messagetable::find($id);
+        $data -> message = $request -> input('message');
+        $data -> save();
+        return redirect() -> action('SNSController@index');
+    }
+
+    public function getDelete(Request $request){
+        $id = $request -> id;
+        $data = Messagetable::find($id);
+        $data -> delete();
+        return redirect() -> action('SNSController@index');
+    }
+
 }
