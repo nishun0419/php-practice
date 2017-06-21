@@ -9,18 +9,17 @@
 	<form method="POST" action="/SNS/edit">
 		<table border="1">
 			<tr>
-				<th>内容</th>
+				<th>タイトル</th>
+					<td><input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="id" value="{{ $data -> id}}">
+					<input type="text" name="title" value="{{ $data -> title }}" ></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="_token" value="{{ csrf_token() }}">
-				<input type="hidden" name="id" value="{{ $data -> id}}">
-				<textarea name="message">{{ 
-				$data -> message }}</textarea></td>
-			</tr>
-			<tr>
-				<td><input type="submit"></td>
+				<th>メッセージ</th>
+					<td><textarea name="message">{{ $data -> message }}</textarea></td>
 			</tr>
 		</table>
+		<input type="submit">
 	</form>
 </body>
 </html>

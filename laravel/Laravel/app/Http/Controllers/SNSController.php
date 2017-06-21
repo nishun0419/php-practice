@@ -16,8 +16,9 @@ class SNSController extends Controller
     }
 
     public function post(Request $request){
+        $tit = $request -> input('title');
     	$msg = $request -> input('message');
-    	MessageTable::create(['message' => $msg]);
+    	MessageTable::create(['title' => $tit, 'message' => $msg]);
     	return redirect() -> action('SNSController@index');
     }
 
@@ -30,6 +31,7 @@ class SNSController extends Controller
     public function postEdit(Request $request){
         $id = $request -> id;
         $data = Messagetable::find($id);
+        $data -> title = $request -> input('title');
         $data -> message = $request -> input('message');
         $data -> save();
         return redirect() -> action('SNSController@index');
@@ -40,6 +42,12 @@ class SNSController extends Controller
         $data = Messagetable::find($id);
         $data -> delete();
         return redirect() -> action('SNSController@index');
+    }
+
+    public function getDetail(Request $request){
+        $id = $request -> id;
+        $data = Messagetable::find($id);
+        return view('SNS.detail', ['data' => $data]);
     }
 
 }

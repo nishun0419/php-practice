@@ -15,6 +15,7 @@ class CreateMessagetableTable extends Migration
     {
         Schema::connection('mysql_SNS')->create('Messagetable', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
             $table->string('message');
             $table->timestamps();
         });
