@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\MessageTable;
 
 class SNSController extends Controller
 {
+
+    public function __construct(){
+        $this -> middleware('auth');
+    }
     public function index(){
-    	$data = MessageTable::orderBy('updated_at', 'desc')->get();
+    	$data = MessageTable::where('user', Auth::user() -> name) -> orderBy('updated_at', 'desc') -> get();
     	return view('SNS.sns_top', ['data' => $data]);
     }
     public function goForm(){
@@ -18,7 +23,7 @@ class SNSController extends Controller
     public function post(Request $request){
         $tit = $request -> input('title');
     	$msg = $request -> input('message');
-    	MessageTable::create(['title' => $tit, 'message' => $msg]);
+    	MessageTable::create(['title' => $tit, 'message' => $msg, 'user' => Auth::user() -> name]);
     	return redirect() -> action('SNSController@index');
     }
 
