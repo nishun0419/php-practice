@@ -7,7 +7,7 @@
 			@if($val -> created_at != $val -> updated_at)
 					&nbsp;&nbsp;&nbsp;更新日時：{{ $val -> updated_at }}
 			@endif 
-			<a href="/SNS/delete?id={{$val -> id}}">削除</a> <a href="/SNS/edit?id={{$val -> id}}">編集</a></div>
+			<a href="/SNS/delete?id={{$val -> id}}">削除</a> <a href="/SNS/edit?id={{$val -> id}}">編集</a>&nbsp;IPアドレス：{{ $_SERVER["REMOTE_ADDR"] }}</div>
 	@endforeach
 
 @endsection
