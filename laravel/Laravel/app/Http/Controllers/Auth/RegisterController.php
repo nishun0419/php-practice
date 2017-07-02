@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -20,7 +22,6 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -37,6 +38,31 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showRegister(){
+        return view('auth.register');
+    }
+
+    public function createRegister(Request $request){
+        $this->validate($request,[
+                'name' => 'required|string',
+                'user_id' => 'required|string',
+                'password' => 'required|string|confirmed',
+                ]);
+        $usr = User::create([
+            'name' => $request -> input('name'),
+            'user_id' => $request -> input('user_id'),
+            'password' => bcrypt($request -> input('password')),
+            ]);
+        Auth::guard()->login($usr);
+        if(Auth::check()){
+            return redirect() -> action('../SNSController@index');
+        }
+
+
+
+        
     }
 
     /**

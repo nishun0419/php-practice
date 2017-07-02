@@ -20,6 +20,7 @@ class SNSController extends Controller
     	return view('SNS.form');
     }
 
+
     public function post(Request $request){
         $tit = $request -> input('title');
     	$msg = $request -> input('message');

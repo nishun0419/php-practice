@@ -34,12 +34,16 @@ Route::get('alert', function(){
 	return view('alert');
 });
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');		//nameは/homeなどのURLの別名をつけるもの
 
 //アプリ作成
 Route::get('SNS', 'SNSController@index');
+Route::get('SNS/login' , 'Auth\LoginController@showLogin') -> name('login');
+Route::post('SNS/login', 'Auth\LoginController@checkLogin');
+Route::get('SNS/register', 'Auth\RegisterController@showRegister')->name('register');
+Route::post('SNS/register', 'Auth\RegisterController@createRegister');
+Route::post('SNS/logout' , 'LogoutController@sendLogout') -> name('logout');
 Route::get('SNS/form', 'SNSController@goForm');
 Route::post('SNS/form', 'SNSController@post');
 Route::get('SNS/edit', 'SNSController@getEdit');
