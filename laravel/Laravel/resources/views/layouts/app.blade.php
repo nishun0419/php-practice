@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                       {{ config('app.name', 'Laravel') }}
+                       成績情報管理
                     </a>
                 </div>
 

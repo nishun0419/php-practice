@@ -57,7 +57,7 @@ class RegisterController extends Controller
             ]);
         Auth::guard()->login($usr);
         if(Auth::check()){
-            return redirect() -> action('../SNSController@index');
+            return redirect() -> action('SNSController@index');
         }
 
 
