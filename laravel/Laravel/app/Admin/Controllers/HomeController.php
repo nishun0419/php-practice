@@ -100,10 +100,10 @@ class HomeController extends Controller
 
             });
 
-            $headers = ['Id', 'Email', 'Name'];
+            $headers = ['Id', 'User_Id', 'Name'];
             $data = User::all();
             foreach($data as $val){
-                $rows[] = array($val -> id, $val -> email, $val -> name);
+                $rows[] = array($val -> id, $val -> user_id, $val -> name);
             }
 
             // array_push($rows,$array);
