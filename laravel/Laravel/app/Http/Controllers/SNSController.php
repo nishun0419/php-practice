@@ -16,9 +16,6 @@ class SNSController extends Controller
     	$data = MessageTable::where('user', Auth::user() -> name) -> orderBy('updated_at', 'desc') -> get();
     	return view('SNS.sns_top', ['data' => $data]);
     }
-    public function goForm(){
-    	return view('SNS.form');
-    }
 
 
     public function post(Request $request){
