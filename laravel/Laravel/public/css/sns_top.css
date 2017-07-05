@@ -21,21 +21,21 @@ body{
 }
 
 #postBox{
-	width: 510px;
-	height: 0px;
+	width: 550px;
+	height: 50px;
 	position: absolute;
   	top: 50%;
   	left: 50%;
-  	margin: -200px 0 0 -300px;
-  	background-color: white;
-  	border:3px solid blue;
+  	margin: -200px 0 0 -275px;
+  	/*background-color: white;*/
 	overflow: hidden;
+
 }
 
 #post_table{
 	margin: 0 auto;
 	margin-top: 10%;
-	width: 500px;
+	width: 490px;
 	/*height: 300px;*/
 }
 
