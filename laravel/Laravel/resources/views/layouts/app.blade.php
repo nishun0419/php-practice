@@ -15,6 +15,7 @@
     <link href="{{ asset('css/sns_top.css') }}" rel="stylesheet">
 </head>
 <body>
+<div id = "wrapper">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -74,6 +75,7 @@
 
         @yield('content')
     </div>
+</div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
