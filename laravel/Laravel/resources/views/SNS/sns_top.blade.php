@@ -40,26 +40,28 @@
 	</div>
 </div>
 
-	<button type="button" class="btn btn-primary post-new">新規登録</button>
+<button type="button" class="btn btn-primary post-new">新規登録</button>
+<div class="container">
 	<div class="row">
-	@foreach($data as $val)
-		<div class="col-sm-2">
-			<div class="panel panel-info">
-				<div class="panel-heading">
-					{{ $val -> title }}
-					<input type="hidden" class="task-id" value="{{ $val -> id }}"> 
-					<button type="button" class="close close-task">&times;</button>
-				</div>
-				<div class="panel-body">
-					{{ $val -> message }}
-					@if($val -> created_at != $val -> updated_at)
-						&nbsp;&nbsp;&nbsp;更新日時：{{ $val -> updated_at }}
-					@endif
+		@foreach($data as $val)
+			<div class="col-sm-4">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						{{ mb_strimwidth($val -> title, 0, 36, "．．．", "UTF-8") }}
+						<input type="hidden" class="task-id" value="{{ $val -> id }}"> 
+						<button type="button" class="close close-task">&times;</button>
+					</div>
+					<div class="panel-body">
+						{{ mb_strimwidth($val -> message, 0, 36, "．．．", "UTF-8") }}
+						<p class="text-right create-Data">
+							{{ $val -> created_at }}
+						</p>
+					</div>
 				</div> 
 		
 			<!-- <a href="/SNS/delete?id={{$val -> id}}">削除</a> <a href="/SNS/edit?id={{$val -> id}}">編集</a>&nbsp;IPアドレス：{{ $_SERVER["REMOTE_ADDR"] }} -->
 			</div>
-		</div>
-	@endforeach
+		@endforeach
 	</div>
+</div>
 @endsection
