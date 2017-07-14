@@ -47,12 +47,14 @@
 			<div class="col-sm-4">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						{{ mb_strimwidth($val -> title, 0, 36, "．．．", "UTF-8") }}
+						<a href="/SNS/detail?id={{ $val -> id }}">
+							{{ mb_strimwidth($val -> title, 0, 36, "...", "UTF-8") }}
+						</a>
 						<input type="hidden" class="task-id" value="{{ $val -> id }}"> 
 						<button type="button" class="close close-task">&times;</button>
 					</div>
-					<div class="panel-body">
-						{{ mb_strimwidth($val -> message, 0, 36, "．．．", "UTF-8") }}
+					<div class="panel-body task-List">
+						{{ mb_strimwidth($val -> message, 0, 36, "...", "UTF-8") }}
 						<p class="text-right create-Data">
 							{{ $val -> created_at }}
 						</p>
