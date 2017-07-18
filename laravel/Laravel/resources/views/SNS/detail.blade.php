@@ -17,5 +17,15 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<button type="button" class="btn btn-primary" id="back-Top">
+				一覧に戻る
+			</button>
+			<button type="button" class="btn btn-danger">
+				削除
+			</button>
+		</div>
+	</div>
 </div>
 @endsection

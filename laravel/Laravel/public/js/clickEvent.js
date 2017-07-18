@@ -15,3 +15,8 @@ $('.close-task').click(function(){
 	location.href="/SNS/delete?id=" + taskId;
 });
 
+$('#back-Top').click(function(){
+	console.log('check');
+	location.href="/SNS";
+})
+

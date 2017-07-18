@@ -20,9 +20,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="Inputmassage">メッセージ</label>
+								<label class="col-md-4 control-label" for="inputMessage">メッセージ</label>
 								<div class="col-md-6">
-									<textarea placeholder="メッセージを入力してください" row="5" class="form-control" name="message" id="Inputmassage"></textarea>
+									<textarea placeholder="メッセージを入力してください" class="form-control" name="message" id="inputMessage"></textarea>
 								</div>
 							</div>
 							<div class="form-group">

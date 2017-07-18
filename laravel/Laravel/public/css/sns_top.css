@@ -21,8 +21,14 @@ body{
  }
 
 #postBox{
-	overflow: hidden;
 	height: 50px;
+	overflow: auto;
+}
+
+textarea{
+	resize: vertical;
+	height: 100px;
+	width: 100px;
 }
 
 #wrapper{
