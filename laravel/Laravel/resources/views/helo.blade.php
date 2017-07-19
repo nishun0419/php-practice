@@ -12,21 +12,21 @@
 </head>
 <body>
 	<h1>Sample</h1>
-	<p>{{ $message }}</p>
-	@if(count($data) > 0)
-	<table>
-		<tr><th>ID</th><th>NAME</th><th>MAIL</th><th>AGE</th><th> </th></tr>
+	<form method="post" action="/helo">
+		{{ csrf_field() }}
+		<input type="text" name="com" autofocus>
+		<input type="submit">
+	</form>
+	@if($message == 0)
 		@foreach($data as $val)
-		<tr>
-			<td><a href="/helo/update?id={{ $val -> id }}">{{ $val -> id }}</a></td>
-			<td>{{ $val -> name }}</td>
-			<td>{{ $val -> mail }}</td>
-			<td>{{ $val -> age }}</td>
-			<td><a href="/helo/delete?id={{ $val -> id }}">X</a></td>
-		</tr>
+			<div>{{ $val }}</div>
 		@endforeach
-	</table>
+	@elseif($message == 127)
+		<strong>正しいコマンドを入力してください</strong>
+	@elseif($message == 1)
+		<strong>入力されたコマンドは実行できません</strong>
+	@else
+		{{ $message }}
 	@endif
-	<a href="/helo/new">新規作成</a>
 </body>
 </html>

@@ -10,18 +10,17 @@ use App\MyTable;
 class HeloController extends Controller
 {
     public function index(Request $request){
-    	$data = MyTable::all();
-        if(count($data) > 0){
-            $msg = 'Mytable List';
-        }else{
-            $msg = 'No Data';
-        }
+        $msg = 'コマンドを入力してください';
+        $data[] = '';
     	return view('helo', ['message' => $msg, 'data' => $data]);
     }
 
     public function postIndex(Request $request){
-    	$res = "You typed:". $request -> input('str');
-    	return view('helo', ['message' => $res]);
+        $com = $request -> input('com');
+        exec("sudo /usr/bin/".$com , $data, $msg);
+        // exec($com, $data, $msg);
+        return view('helo', ['message' => $msg, 'data' => $data]); 
+
     }
 
     public function getNew(){
