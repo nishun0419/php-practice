@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="css/sns_top.css" rel="stylesheet">
+    <link href="{{ asset('css/sns_top.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id = "wrapper">

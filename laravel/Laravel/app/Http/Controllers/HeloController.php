@@ -17,8 +17,10 @@ class HeloController extends Controller
 
     public function postIndex(Request $request){
         $com = $request -> input('com');
-        exec("sudo /usr/bin/".$com , $data, $msg);
-        // exec($com, $data, $msg);
+        // exec("sudo /usr/bin/".$com , $data, $msg);
+        exec($com, $data, $msg);
+        $data = preg_replace( "/\s/", "&nbsp;", $data);
+        // $data = preg_replace("/\\\\/", "&#92;", $data);
         return view('helo', ['message' => $msg, 'data' => $data]); 
 
     }

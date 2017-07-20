@@ -8,6 +8,7 @@
 		h1{font-size: 18pt; font-weight: bold;}
 		th{ color: white; background-color: #999; }
 		td{ color: black; background-color: #B2D5E5; }
+		p{padding : 0; margin: 0; font-family:'Courier New',Courier;}
 	</style>
 </head>
 <body>
@@ -19,7 +20,7 @@
 	</form>
 	@if($message == 0)
 		@foreach($data as $val)
-			<div>{{ $val }}</div>
+			<p>{{ $val }}</p>
 		@endforeach
 	@elseif($message == 127)
 		<strong>正しいコマンドを入力してください</strong>

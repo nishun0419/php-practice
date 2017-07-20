@@ -1,6 +1,6 @@
 $('.post-new').click(function(){
 	$('#white_back').css('display', 'block');
-	$('#postBox').animate({height: '400px'},1000);
+	$('#postBox').animate({height: '310px'},1000);
 });
 
 $('#close-PostBox').click(function(){
