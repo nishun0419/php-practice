@@ -40,8 +40,9 @@
 	</div>
 </div>
 
-<button type="button" class="btn btn-primary post-new">新規登録</button>
 <div class="container">
+	<button type="button" class="btn btn-primary post-new">新規登録
+	</button>
 	<div class="row">
 		@foreach($data as $val)
 			<div class="col-sm-4">

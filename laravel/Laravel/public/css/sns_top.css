@@ -8,6 +8,12 @@ body{
 	margin: 0%;
 }
 */
+.fixed{
+	position: fixed;
+	height: 100%;
+	width: 100%;
+}
+
 #white_back{
   	display: none;
   	padding-top: 70px;
