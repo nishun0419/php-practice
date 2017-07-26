@@ -22,7 +22,8 @@
 			<button type="button" class="btn btn-primary" id="back-Top">
 				一覧に戻る
 			</button>
-			<button type="button" class="btn btn-danger">
+			<input type="hidden" class="task-Id" value="{{ $data -> id }}">
+			<button type="button" class="btn btn-danger" id="detail-Delete">
 				削除
 			</button>
 		</div>

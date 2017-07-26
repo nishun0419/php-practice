@@ -24,5 +24,11 @@ $(function(){
 	$('#back-Top').on('click', function(){
 		location.href="/SNS";
 	});
+
+	$('#detail-Delete').on('click', function(){
+		var taskId= $('.task-Id').val();
+		console.log(taskId);
+		location.href="/SNS/delete?id=" + taskId; 
+	});
 });
 
