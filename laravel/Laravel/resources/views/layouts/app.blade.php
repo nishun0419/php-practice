@@ -13,6 +13,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sns_top.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src ="js/lightbox.min.js"></script>
 </head>
 <body>
 <div id = "wrapper">

@@ -26,6 +26,12 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-md-4 control-label" for="inputFile">画像</label>
+								<div class="col-md-6">
+									<input type="file" id="inputFile">
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-md-8 col-md-offset-4">
 						  			<button type="submit" class="btn btn-primary">
                             		投稿
@@ -56,6 +62,10 @@
 					</div>
 					<div class="panel-body task-List">
 						{{ mb_strimwidth($val -> message, 0, 36, "...", "UTF-8") }}
+						<p class="text-left">
+							<img src="images/imgh1.jpg" class="smallImage" alt=image />
+							<img src="images/imgh1.jpg" class="smallImage" alt=image />
+						</p>
 						<p class="text-right create-Data">
 							{{ $val -> created_at }}
 						</p>
