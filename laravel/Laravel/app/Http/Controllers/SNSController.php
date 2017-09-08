@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\MessageTable;
 
@@ -54,14 +55,14 @@ class SNSController extends Controller
     }
 
     public function getAvater($avaterImage){
-        $path = storage_path('images/avater/'.$avaterImage);
-        $file = File::get($path);
-        $type = File::mimeType($path);
+        // $path = storage_path('images/avater/'.$avaterImage);
+        // $file = File::get($path);
+        // $type = File::mimeType($path);
 
-        $response = Response::make($file, 200);
-        $response = header("Content-Type", $type);
-
-        return response;
+        // $response = Response::make($file, 200);
+        // $response = header("Content-Type", $type);
+    	$response = Storage::disk('avater') -> get($avaterImage);
+        return $response;
     }
 
 }

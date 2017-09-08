@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -58,10 +59,13 @@ class RegisterController extends Controller
             ]);
 
         if($request->hasFile('avater_file')){
-            $request->file('avater_file')->move(storage_path('images/avater'), 'test.jpg');
-            $usr -> avater_file = storage_path('images/avater').'/test.jpg';
-            $usr->save();
+            $file = $request -> file('avater_file');
+            $newFileName = sprintf("%s.%s",md5(time().$file -> getClientOriginalName()), $file -> getClientOriginalExtension());
+            // Storage::disk('avater') -> put($newFileName);
 
+            $file->move(storage_path('images/avater'), $newFileName);
+            $usr -> avater_file = $newFileName;
+            $usr->save();
         }
         Auth::guard()->login($usr);
         if(Auth::check()){

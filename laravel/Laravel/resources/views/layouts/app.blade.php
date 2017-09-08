@@ -51,7 +51,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   <img src="{{ url('SNS/avater/test.jpg') }}" class="img-circle userImage" alt="userImage" width="30" height="30"> {{ Auth::user()->name }} <span class="caret"></span>
+                                   <img src="{{ url('SNS/avater/'.Auth::user() -> avater_file) }}" class="img-circle userImage" alt="userImage" width="30" height="30"> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
