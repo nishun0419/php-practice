@@ -14,10 +14,10 @@
 				<div class="panel-body">
 					{{ $data -> message}}
 					<p>
-						<a href="{{ asset('images/imgh1.jpg') }}" data-lightbox="group">
+						<a href="{{ asset('images/imgh1.jpg') }}" rel="lightbox[set]">
 							<img src="{{ asset('images/imgh1.jpg') }}" width="256"/>
 						</a>
-						<a href="{{ asset('images/imgh1.jpg') }}" data-lightbox="group">
+						<a href="{{ asset('images/imgh1.jpg') }}" rel="lightbox[set]">
 							<img src="{{ asset('images/imgh1.jpg') }}" width="256"/>
 						</a>
 					</p>

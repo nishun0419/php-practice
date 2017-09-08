@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="register">
+                    <form class="form-horizontal" role="form" method="POST" action="register" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -57,6 +57,13 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="avater_file" class="col-md-4 control-label">Avater</label>
+                            <div class="col-md-6">
+                                <input type="file" id="avater_file" name="avater_file">
                             </div>
                         </div>
 

@@ -49,12 +49,20 @@ class RegisterController extends Controller
                 'name' => 'required|string',
                 'user_id' => 'required|string',
                 'password' => 'required|string|confirmed',
+                'avater_file' => 'required|file',
                 ]);
         $usr = User::create([
             'name' => $request -> input('name'),
             'user_id' => $request -> input('user_id'),
             'password' => bcrypt($request -> input('password')),
             ]);
+
+        if($request->hasFile('avater_file')){
+            $request->file('avater_file')->move(storage_path('images/avater'), 'test.jpg');
+            $usr -> avater_file = storage_path('images/avater').'/test.jpg';
+            $usr->save();
+
+        }
         Auth::guard()->login($usr);
         if(Auth::check()){
             return redirect() -> action('SNSController@index');

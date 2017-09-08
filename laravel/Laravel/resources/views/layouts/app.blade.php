@@ -14,9 +14,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sns_top.css') }}" rel="stylesheet">
     <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src ="js/lightbox.min.js"></script>
 </head>
 <body>
 <div id = "wrapper">
@@ -54,7 +51,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                   <img src="{{ url('SNS/avater/test.jpg') }}" class="img-circle userImage" alt="userImage" width="30" height="30"> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
@@ -84,5 +81,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/clickEvent.js') }}"></script>
+    <script src ="{{ asset('js/lightbox.min.js') }}"></script>
 </body>
 </html>

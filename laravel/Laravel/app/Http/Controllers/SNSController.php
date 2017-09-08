@@ -53,4 +53,15 @@ class SNSController extends Controller
         return view('SNS.detail', ['data' => $data]);
     }
 
+    public function getAvater($avaterImage){
+        $path = storage_path('images/avater/'.$avaterImage);
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response = header("Content-Type", $type);
+
+        return response;
+    }
+
 }

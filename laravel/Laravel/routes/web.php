@@ -50,3 +50,4 @@ Route::get('SNS/edit', 'SNSController@getEdit');
 Route::post('SNS/edit', 'SNSController@postEdit');
 Route::get('SNS/delete', 'SNSController@getDelete');
 Route::get('SNS/detail', 'SNSController@getDetail');
+Route::get('SNS/avater/{avaterImage}', 'SNSController@getAvater');
