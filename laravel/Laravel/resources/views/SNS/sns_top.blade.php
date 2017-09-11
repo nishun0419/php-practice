@@ -49,7 +49,7 @@
 <div class="container">
 	<button type="button" class="btn btn-primary post-new">新規登録
 	</button>
-	<div class="row">
+	<div class="row row-eq-height">
 		@foreach($data as $val)
 			<div class="col-sm-4">
 				<div class="panel panel-info">
@@ -62,6 +62,16 @@
 					</div>
 					<div class="panel-body task-List">
 						{{ mb_strimwidth($val -> message, 0, 36, "...", "UTF-8") }}
+						<p>
+						@if($val -> image_url != "")
+							@for($i = 0; $i < 2; $i++)
+								@empty($val -> image_url[$i])
+									@break
+								@endempty
+								<img src = "{{ url('SNS/image/'. $val -> image_url[$i]) }}" width="50" height="50">
+							@endfor
+						@endif
+						</p>
 
 						<p class="text-right create-Data">
 							{{ $val -> created_at }}

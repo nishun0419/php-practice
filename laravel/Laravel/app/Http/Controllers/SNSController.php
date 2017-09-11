@@ -15,11 +15,13 @@ class SNSController extends Controller
     }
     public function index(){
     	$data = MessageTable::where('user', Auth::user() -> name) -> orderBy('updated_at', 'desc') -> get();
-        // foreach ($data as $val) {
-        //     if($val -> image_url != null){
-        //         $val -> $image_url = explode(',', $val -> $image_url); 
-        //     }
-        // }
+        foreach ($data as $val) {
+            if($val -> image_url != null){
+               $val -> image_url = explode(',', $val -> image_url); 
+                logger($val -> image_url);
+            }
+        }
+        logger($data);
     	return view('SNS.sns_top', ['data' => $data]);
     }
 
@@ -28,17 +30,19 @@ class SNSController extends Controller
         $tit = $request -> input('title');
     	$msg = $request -> input('message');
     	$msTab = MessageTable::create(['title' => $tit, 'message' => $msg, 'user' => Auth::user() -> name]);
+    	logger($request -> file('inputImage'));
         if($request -> hasFile('inputImage')){
-            $image_url = "";
-            $files = $request -> input('inputImage');
-            for ($i = 0; $i < count($files); $i++) {
-                 $file = $files[$i];
+            $image_url = null;
+            $files = $request -> file('inputImage');
+            foreach ($files as $file) {
                  $newFileName = sprintf("%s.%s",md5(time().$file -> getClientOriginalName()), $file -> getClientOriginalExtension());
                  $file -> move(storage_path('images/image'), $newFileName);
                  if($image_url == null){
                     $image_url = $newFileName;
                  }
-                 $image_url = $image_url. ',' .$newFileName; 
+                 else{
+                 	$image_url = $image_url. ',' .$newFileName;
+                 } 
              }
              $msTab -> image_url = $image_url;
              $msTab -> save();
