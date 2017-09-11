@@ -14,12 +14,13 @@
 				<div class="panel-body">
 					{{ $data -> message}}
 					<p>
-						<a href="{{ asset('images/imgh1.jpg') }}" rel="lightbox[set]">
-							<img src="{{ asset('images/imgh1.jpg') }}" width="256"/>
-						</a>
-						<a href="{{ asset('images/imgh1.jpg') }}" rel="lightbox[set]">
-							<img src="{{ asset('images/imgh1.jpg') }}" width="256"/>
-						</a>
+						@isset($images)
+							@for($i = 0; $i < count($images); $i++)
+								<a href="{{ url('SNS/image/'. $images[$i]) }}" rel="lightbox[set]">
+								<img src="{{ url('SNS/image/'. $images[$i]) }}" width="256"/>
+							</a>
+							@endfor
+						@endisset
 					</p>
 				</div>
 			</div>

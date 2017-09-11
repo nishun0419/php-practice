@@ -11,7 +11,7 @@
 						<button type="button" class="close" id="close-PostBox">&times;</button>
 					</div>
 					<div class="panel-body">
-						<form class="form-horizontal" method="POST" action="/SNS/form">
+						<form class="form-horizontal" method="POST" action="/SNS/form" enctype="multipart/form-data">
 							{{ csrf_field() }}
 							<div class="form-group">
 								<label class="col-md-4 control-label" for="Inputtitle">タイトル</label>
@@ -26,9 +26,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="inputFile">画像</label>
+								<label class="col-md-4 control-label" for="inputImage">画像</label>
 								<div class="col-md-6">
-									<input type="file" id="inputFile">
+									<input type="file" id="inputImage" name="inputImage[]" multiple="multiple">
 								</div>
 							</div>
 							<div class="form-group">
@@ -62,17 +62,12 @@
 					</div>
 					<div class="panel-body task-List">
 						{{ mb_strimwidth($val -> message, 0, 36, "...", "UTF-8") }}
-						<p class="text-left">
-							<img src="images/imgh1.jpg" class="smallImage" alt=image />
-							<img src="images/imgh1.jpg" class="smallImage" alt=image />
-						</p>
+
 						<p class="text-right create-Data">
 							{{ $val -> created_at }}
 						</p>
 					</div>
 				</div> 
-		
-			<!-- <a href="/SNS/delete?id={{$val -> id}}">削除</a> <a href="/SNS/edit?id={{$val -> id}}">編集</a>&nbsp;IPアドレス：{{ $_SERVER["REMOTE_ADDR"] }} -->
 			</div>
 		@endforeach
 	</div>

@@ -15,6 +15,11 @@ class SNSController extends Controller
     }
     public function index(){
     	$data = MessageTable::where('user', Auth::user() -> name) -> orderBy('updated_at', 'desc') -> get();
+        // foreach ($data as $val) {
+        //     if($val -> image_url != null){
+        //         $val -> $image_url = explode(',', $val -> $image_url); 
+        //     }
+        // }
     	return view('SNS.sns_top', ['data' => $data]);
     }
 
@@ -22,7 +27,22 @@ class SNSController extends Controller
     public function post(Request $request){
         $tit = $request -> input('title');
     	$msg = $request -> input('message');
-    	MessageTable::create(['title' => $tit, 'message' => $msg, 'user' => Auth::user() -> name]);
+    	$msTab = MessageTable::create(['title' => $tit, 'message' => $msg, 'user' => Auth::user() -> name]);
+        if($request -> hasFile('inputImage')){
+            $image_url = "";
+            $files = $request -> input('inputImage');
+            for ($i = 0; $i < count($files); $i++) {
+                 $file = $files[$i];
+                 $newFileName = sprintf("%s.%s",md5(time().$file -> getClientOriginalName()), $file -> getClientOriginalExtension());
+                 $file -> move(storage_path('images/image'), $newFileName);
+                 if($image_url == null){
+                    $image_url = $newFileName;
+                 }
+                 $image_url = $image_url. ',' .$newFileName; 
+             }
+             $msTab -> image_url = $image_url;
+             $msTab -> save();
+        }
     	return redirect() -> action('SNSController@index');
     }
 
@@ -51,7 +71,8 @@ class SNSController extends Controller
     public function getDetail(Request $request){
         $id = $request -> id;
         $data = Messagetable::find($id);
-        return view('SNS.detail', ['data' => $data]);
+        $images = explode(',' , $data -> image_url);
+        return view('SNS.detail', ['data' => $data, 'images' => $images]);
     }
 
     public function getAvater($avaterImage){
@@ -62,6 +83,11 @@ class SNSController extends Controller
         // $response = Response::make($file, 200);
         // $response = header("Content-Type", $type);
     	$response = Storage::disk('avater') -> get($avaterImage);
+        return $response;
+    }
+
+    public function getImage($images){
+        $response = Storage::disk('image') -> get($images);
         return $response;
     }
 
