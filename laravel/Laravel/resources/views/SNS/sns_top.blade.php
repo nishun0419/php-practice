@@ -31,6 +31,16 @@
 									<input type="file" id="inputImage" name="inputImage[]" multiple="multiple">
 								</div>
 							</div>
+							<div class="radio col-md-offset-4">
+								<label>
+									<input type="radio" name="security" value="public" checked>公開
+								</label>
+							</div>
+							<div class="radio col-md-offset-4">
+								<label>
+									<input type="radio" name="security" value="private">非公開
+								</label>
+							</div>
 							<div class="form-group">
 								<div class="col-md-8 col-md-offset-4">
 						  			<button type="submit" class="btn btn-primary">
@@ -52,23 +62,25 @@
 	<div class="row row-eq-height">
 		@foreach($data as $val)
 			<div class="col-sm-4">
-				<div class="panel panel-info">
+				<div class="panel{{ $val -> security == true ? ' panel-info' : ' panel-success' }}">
 					<div class="panel-heading">
 						<a href="/SNS/detail?id={{ $val -> id }}">
 							{{ mb_strimwidth($val -> title, 0, 36, "...", "UTF-8") }}
 						</a>
-						<input type="hidden" class="task-id" value="{{ $val -> id }}"> 
-						<button type="button" class="close close-task">&times;</button>
+						<input type="hidden" class="task-id" value="{{ $val -> id }}">
+						@if(Auth::user()-> user_id == $val -> user)
+							<button type="button" class="close close-task">&times;</button>
+						@endif
 					</div>
 					<div class="panel-body task-List">
 						{{ mb_strimwidth($val -> message, 0, 36, "...", "UTF-8") }}
 						<p>
 						@if($val -> image_url != "")
-							@for($i = 0; $i < 2; $i++)
+							@for($i = 0; $i < 3; $i++)
 								@empty($val -> image_url[$i])
 									@break
 								@endempty
-								<img src = "{{ url('SNS/image/'. $val -> image_url[$i]) }}" width="50" height="50">
+								<img src = "{{ url('SNS/image/'. $val -> image_url[$i]) }}" width="100" height="70">
 							@endfor
 						@endif
 						</p>
@@ -77,7 +89,7 @@
 							{{ $val -> created_at }}
 						</p>
 					</div>
-				</div> 
+				</div>
 			</div>
 		@endforeach
 	</div>

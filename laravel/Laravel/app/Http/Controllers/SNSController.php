@@ -14,7 +14,7 @@ class SNSController extends Controller
         $this -> middleware('auth');
     }
     public function index(){
-    	$data = MessageTable::where('user', Auth::user() -> name) -> orderBy('updated_at', 'desc') -> get();
+    	$data = MessageTable::where('user', Auth::user() -> user_id) -> orWhere('security', true) -> orderBy('updated_at', 'desc') -> get();
         foreach ($data as $val) {
             if($val -> image_url != null){
                $val -> image_url = explode(',', $val -> image_url); 
@@ -29,7 +29,11 @@ class SNSController extends Controller
     public function post(Request $request){
         $tit = $request -> input('title');
     	$msg = $request -> input('message');
-    	$msTab = MessageTable::create(['title' => $tit, 'message' => $msg, 'user' => Auth::user() -> name]);
+        $security = true;
+        if($request -> input('security') == 'private'){
+            $security = false;
+        }
+    	$msTab = MessageTable::create(['title' => $tit, 'message' => $msg, 'user' => Auth::user() -> user_id, 'security' => $security]);
     	logger($request -> file('inputImage'));
         if($request -> hasFile('inputImage')){
             $image_url = null;

@@ -6,7 +6,7 @@ $(function(){
 		scrollpos = $(window).scrollTop();
 		$('body').addClass('fixed').css({'top': -scrollpos});
 		$('#white_back').css('display', 'block');
-		$('#postBox').animate({height: '310px'},1000);
+		$('#postBox').animate({height: '400px'},1000);
 	});
 
 	$('#close-PostBox').on('click', function(){

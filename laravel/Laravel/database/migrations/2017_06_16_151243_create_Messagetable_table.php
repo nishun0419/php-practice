@@ -18,6 +18,7 @@ class CreateMessagetableTable extends Migration
             $table->string('title');
             $table->string('message');
             $table->string('user');
+            $table->boolean('security');
             $table->string('image_url')->nullable();
             $table->timestamps();
         });

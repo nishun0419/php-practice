@@ -48,9 +48,9 @@ class RegisterController extends Controller
     public function createRegister(Request $request){
         $this->validate($request,[
                 'name' => 'required|string',
-                'user_id' => 'required|string',
+                'user_id' => 'required|string|alpha|unique:users,user_id',
                 'password' => 'required|string|confirmed',
-                'avater_file' => 'required|file',
+                'avater_file' => 'file',
                 ]);
         $usr = User::create([
             'name' => $request -> input('name'),
@@ -65,8 +65,11 @@ class RegisterController extends Controller
 
             $file->move(storage_path('images/avater'), $newFileName);
             $usr -> avater_file = $newFileName;
-            $usr->save();
         }
+        else{
+            $usr -> avater_file = 'avater_error.jpg';
+        }
+        $usr -> save(); 
         Auth::guard()->login($usr);
         if(Auth::check()){
             return redirect() -> action('SNSController@index');
