@@ -31,10 +31,12 @@
 			<button type="button" class="btn btn-primary" id="back-Top">
 				一覧に戻る
 			</button>
-			<input type="hidden" class="task-Id" value="{{ $data -> id }}">
-			<button type="button" class="btn btn-danger" id="detail-Delete">
-				削除
-			</button>
+			@if($data -> user == Auth::user() -> user_id)
+				<input type="hidden" class="task-Id" value="{{ $data -> id }}">
+				<button type="button" class="btn btn-danger" id="detail-Delete">
+					削除
+				</button>
+			@endif
 		</div>
 	</div>
 </div>

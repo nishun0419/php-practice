@@ -72,6 +72,9 @@ class SNSController extends Controller
     public function getDelete(Request $request){
         $id = $request -> id;
         $data = Messagetable::find($id);
+        if($data -> user != Auth::user() -> user_id){
+            return redirect() -> back();
+        }
         $data -> delete();
         return redirect() -> action('SNSController@index');
     }

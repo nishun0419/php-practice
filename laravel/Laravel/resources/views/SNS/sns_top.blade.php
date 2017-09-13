@@ -59,9 +59,9 @@
 <div class="container">
 	<button type="button" class="btn btn-primary post-new">新規登録
 	</button>
-	<div class="row row-eq-height">
+	<div class="row">
 		@foreach($data as $val)
-			<div class="col-sm-4">
+			<div class="col-md-4">
 				<div class="panel{{ $val -> security == true ? ' panel-info' : ' panel-success' }}">
 					<div class="panel-heading">
 						<a href="/SNS/detail?id={{ $val -> id }}">
@@ -80,8 +80,10 @@
 								@empty($val -> image_url[$i])
 									@break
 								@endempty
-								<img src = "{{ url('SNS/image/'. $val -> image_url[$i]) }}" width="100" height="70">
+								<img src = "{{ url('SNS/image/'. $val -> image_url[$i]) }}" height="70", width="100">
 							@endfor
+						@else
+							<div class="noImage"></div>
 						@endif
 						</p>
 

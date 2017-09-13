@@ -50,11 +50,9 @@ textarea{
 	/*position: relative;*/
 }
 
-.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+.noImage{
+	height: 59px;
+	width: 100px;
 }
 
 .create-Data{

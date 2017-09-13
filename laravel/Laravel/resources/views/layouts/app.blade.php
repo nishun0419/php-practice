@@ -56,13 +56,13 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="SNS/logout"
+                                        <a href="{{ url('SNS/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="SNS/logout" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ url('SNS/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
