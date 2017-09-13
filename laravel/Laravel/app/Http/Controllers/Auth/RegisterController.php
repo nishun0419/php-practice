@@ -63,7 +63,8 @@ class RegisterController extends Controller
             $newFileName = sprintf("%s.%s",md5(time().$file -> getClientOriginalName()), $file -> getClientOriginalExtension());
             // Storage::disk('avater') -> put($newFileName);
 
-            $file->move(storage_path('images/avater'), $newFileName);
+            // $file->move(storage_path('images/avater'), $newFileName);
+            Storage::disk('google') -> put($newFileName,  file_get_contents($file));
             $usr -> avater_file = $newFileName;
         }
         else{

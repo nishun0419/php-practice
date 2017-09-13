@@ -93,7 +93,7 @@ class SNSController extends Controller
 
         // $response = Response::make($file, 200);
         // $response = header("Content-Type", $type);
-    	$response = Storage::disk('avater') -> get($avaterImage);
+    	$response = Storage::disk('google') -> get($avaterImage);
         return $response;
     }
 
