@@ -64,7 +64,11 @@ class RegisterController extends Controller
             // Storage::disk('avater') -> put($newFileName);
 
             // $file->move(storage_path('images/avater'), $newFileName);
-            Storage::disk('google') -> put($newFileName,  file_get_contents($file));
+             $contents = collect(Storage::disk('google')->listContents('/', false));
+             $dir = $contents ->where('type','=','dir')
+                ->where('filename','=','avater')
+                ->first();
+            Storage::disk('google') -> put($dir['path'].'/'.$newFileName,  file_get_contents($file));
             $usr -> avater_file = $newFileName;
         }
         else{

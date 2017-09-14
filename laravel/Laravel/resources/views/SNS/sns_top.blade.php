@@ -62,9 +62,28 @@
 	<div class="row">
 		@foreach($data as $val)
 			<div class="col-md-4">
-				<div class="panel{{ $val -> security == true ? ' panel-info' : ' panel-success' }}">
+				<div class="panel{{ $val -> security == true ? ' panel-info' : ' panel-primary' }}">
 					<div class="panel-heading">
-						<a href="/SNS/detail?id={{ $val -> id }}">
+						@if($val -> visit_user != "")
+							@foreach($val -> visit_user as $visit)
+								@if($visit == Auth::user() -> user_id)
+									@php
+										$flag = true;
+									@endphp
+									@break
+								@endif
+							@endforeach
+							@if(!$flag)
+								<span class="label label-danger">New</span>
+							@endif
+							@php
+								$flag = false;
+							@endphp
+						@else
+							<span class="label label-danger">New</span>
+						@endif
+						<a href="/SNS/detail?id={{ $val -> id }}" class="{{ $val -> security == true ?
+							'titlePublic' : 'titlePrivate' }}">
 							{{ mb_strimwidth($val -> title, 0, 36, "...", "UTF-8") }}
 						</a>
 						<input type="hidden" class="task-id" value="{{ $val -> id }}">

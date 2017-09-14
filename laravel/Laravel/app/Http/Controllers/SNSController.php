@@ -20,9 +20,13 @@ class SNSController extends Controller
                $val -> image_url = explode(',', $val -> image_url); 
                 logger($val -> image_url);
             }
+
+            if($val -> visit_user != null){
+                $val -> visit_user = explode(',',$val -> visit_user);
+            }
         }
-        logger($data);
-    	return view('SNS.sns_top', ['data' => $data]);
+        // logger($data);
+    	return view('SNS.sns_top', ['data' => $data, 'flag' => false]);
     }
 
 
@@ -38,9 +42,13 @@ class SNSController extends Controller
         if($request -> hasFile('inputImage')){
             $image_url = null;
             $files = $request -> file('inputImage');
+            $contents = collect(Storage::disk('google') -> listContents('/',false));
+            $dir = $contents -> where('type','=','dir')
+                ->where('filename','=','image')
+                ->first();
             foreach ($files as $file) {
                  $newFileName = sprintf("%s.%s",md5(time().$file -> getClientOriginalName()), $file -> getClientOriginalExtension());
-                 $file -> move(storage_path('images/image'), $newFileName);
+                 Storage::disk('google') -> put($dir['path'].'/'.$newFileName, file_get_contents($file));
                  if($image_url == null){
                     $image_url = $newFileName;
                  }
@@ -82,6 +90,24 @@ class SNSController extends Controller
     public function getDetail(Request $request){
         $id = $request -> id;
         $data = Messagetable::find($id);
+        $flag = false;
+        if($data -> visit_user == null){
+            $data -> visit_user = Auth::user() -> user_id;
+            $data->save();
+        }
+        else{
+            $visits=explode(',', $data -> visit_user);
+            foreach($visits as $visit){
+                if($visit == Auth::user() -> user_id){
+                    $flag = true;
+                    break;
+                }
+            }
+            if(!$flag){
+                $data -> visit_user =$data -> visit_user. ','. Auth::user() -> user_id;
+                $data -> save(); 
+            }
+        }
         $images = explode(',' , $data -> image_url);
         return view('SNS.detail', ['data' => $data, 'images' => $images]);
     }
@@ -93,13 +119,41 @@ class SNSController extends Controller
 
         // $response = Response::make($file, 200);
         // $response = header("Content-Type", $type);
-    	$response = Storage::disk('google') -> get($avaterImage);
-        return $response;
+        $contents = collect(Storage::disk('google')->listContents('/', false));
+        $dir = $contents ->where('type','=','dir')
+                ->where('filename','=','avater')
+                ->first();
+        $contents = collect(Storage::disk('google')->listContents($dir['path'], false));
+        $file = $contents
+                ->where('type', '=', 'file' )
+                ->where('filename', '=', pathinfo($avaterImage, PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($avaterImage, PATHINFO_EXTENSION))
+                ->first();
+    	$rawData = Storage::disk('google') -> get($file['path']);
+        // logger($rawData);
+        return response($rawData, 200)
+                ->header('Content-Type', $file['mimetype'])
+                ->header('Content-Disposition', "attachment; filename='$avaterImage'");
     }
 
     public function getImage($images){
-        $response = Storage::disk('image') -> get($images);
-        return $response;
+        // $response = Storage::disk('image') -> get($images);
+        // return $response;
+        $contents = collect(Storage::disk('google')->listContents('/', false));
+        $dir = $contents ->where('type','=','dir')
+                ->where('filename','=','image')
+                ->first();
+        $contents = collect(Storage::disk('google')->listContents($dir['path'], false));
+        $file = $contents
+                ->where('type', '=', 'file' )
+                ->where('filename', '=', pathinfo($images, PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($images, PATHINFO_EXTENSION))
+                ->first();
+        $rawData = Storage::disk('google') -> get($file['path']);
+        // logger($rawData);
+        return response($rawData, 200)
+                ->header('Content-Type', $file['mimetype'])
+                ->header('Content-Disposition', "attachment; filename='$images'");
     }
 
 }

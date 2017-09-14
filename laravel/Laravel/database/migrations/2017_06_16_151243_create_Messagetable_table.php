@@ -20,6 +20,7 @@ class CreateMessagetableTable extends Migration
             $table->string('user');
             $table->boolean('security');
             $table->string('image_url')->nullable();
+            $table->string('visit_user')->nullable();
             $table->timestamps();
         });
     }
