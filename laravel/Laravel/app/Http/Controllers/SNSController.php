@@ -14,7 +14,7 @@ class SNSController extends Controller
         $this -> middleware('auth');
     }
     public function index(){
-    	$data = MessageTable::where('user', Auth::user() -> user_id) -> orWhere('security', true) -> orderBy('updated_at', 'desc') -> get();
+    	$data = MessageTable::where('user', Auth::user() -> user_id) -> orWhere('security', true) -> orderBy('created_at', 'desc') -> get();
         foreach ($data as $val) {
             if($val -> image_url != null){
                $val -> image_url = explode(',', $val -> image_url); 
@@ -83,6 +83,23 @@ class SNSController extends Controller
         if($data -> user != Auth::user() -> user_id){
             return redirect() -> back();
         }
+        $contents = collect(Storage::disk('google')->listContents('/', false));
+        $dir = $contents ->where('type','=','dir')
+                ->where('filename','=','image')
+                ->first();
+        $contents = collect(Storage::disk('google')->listContents($dir['path'], false));
+        if($data -> image_url != null){
+            $images = explode(',', $data -> image_url);
+            foreach($images as $image){
+                $file = $contents
+                        ->where('type', '=', 'file' )
+                        ->where('filename', '=', pathinfo($image, PATHINFO_FILENAME))
+                        ->where('extension', '=', pathinfo($image, PATHINFO_EXTENSION))
+                        ->first();
+                $rawData = Storage::disk('google') -> delete($file['path']);
+            }
+        }
+
         $data -> delete();
         return redirect() -> action('SNSController@index');
     }
