@@ -11,9 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/sns_top.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
+    @loadLocalCSS(/css/app.css)
+    @loadLocalCSS(/css/sns_top.css)
+    @loadLocalCSS(/css/lightbox.css)
 </head>
 <body>
 <div id = "wrapper">

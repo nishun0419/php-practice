@@ -42,13 +42,14 @@ class SNSController extends Controller
         if($request -> hasFile('inputImage')){
             $image_url = null;
             $files = $request -> file('inputImage');
-            $contents = collect(Storage::disk('google') -> listContents('/',false));
+            Storage::disk('google_image')->makeDirectory($msTab -> id);
+            $contents = collect(Storage::disk('google_image') -> listContents('/',false));
             $dir = $contents -> where('type','=','dir')
-                ->where('filename','=','image')
+                ->where('filename','=',$msTab -> id)
                 ->first();
             foreach ($files as $file) {
                  $newFileName = sprintf("%s.%s",md5(time().$file -> getClientOriginalName()), $file -> getClientOriginalExtension());
-                 Storage::disk('google') -> put($dir['path'].'/'.$newFileName, file_get_contents($file));
+                 Storage::disk('google_image') -> put($dir['path'].'/'.$newFileName, file_get_contents($file));
                  if($image_url == null){
                     $image_url = $newFileName;
                  }
@@ -83,21 +84,20 @@ class SNSController extends Controller
         if($data -> user != Auth::user() -> user_id){
             return redirect() -> back();
         }
-        $contents = collect(Storage::disk('google')->listContents('/', false));
-        $dir = $contents ->where('type','=','dir')
-                ->where('filename','=','image')
-                ->first();
-        $contents = collect(Storage::disk('google')->listContents($dir['path'], false));
+        // $contents = collect(Storage::disk('google')->listContents($dir['path'], false));
         if($data -> image_url != null){
-            $images = explode(',', $data -> image_url);
-            foreach($images as $image){
-                $file = $contents
-                        ->where('type', '=', 'file' )
-                        ->where('filename', '=', pathinfo($image, PATHINFO_FILENAME))
-                        ->where('extension', '=', pathinfo($image, PATHINFO_EXTENSION))
-                        ->first();
-                $rawData = Storage::disk('google') -> delete($file['path']);
-            }
+            // $images = explode(',', $data -> image_url);
+            $contents = collect(Storage::disk('google_image')->listContents('/', false));
+            $dir = $contents ->where('type','=','dir')
+                ->where('filename','=',$id)
+                ->first();
+            // foreach($images as $image){
+            //     $file = $contents
+            //             ->where('type', '=', 'file' )
+            //             ->where('filename', '=', pathinfo($image, PATHINFO_FILENAME))
+            //             ->where('extension', '=', pathinfo($image, PATHINFO_EXTENSION))
+            //             ->first();
+                $rawData = Storage::disk('google') -> deleteDirectory($dir['path']);
         }
 
         $data -> delete();
@@ -153,20 +153,20 @@ class SNSController extends Controller
                 ->header('Content-Disposition', "attachment; filename='$avaterImage'");
     }
 
-    public function getImage($images){
+    public function getImage($id, $images){
         // $response = Storage::disk('image') -> get($images);
         // return $response;
-        $contents = collect(Storage::disk('google')->listContents('/', false));
+        $contents = collect(Storage::disk('google_image')->listContents('/', false));
         $dir = $contents ->where('type','=','dir')
-                ->where('filename','=','image')
+                ->where('filename','=',$id)
                 ->first();
-        $contents = collect(Storage::disk('google')->listContents($dir['path'], false));
+        $contents = collect(Storage::disk('google_image')->listContents($dir['path'], false));
         $file = $contents
                 ->where('type', '=', 'file' )
                 ->where('filename', '=', pathinfo($images, PATHINFO_FILENAME))
                 ->where('extension', '=', pathinfo($images, PATHINFO_EXTENSION))
                 ->first();
-        $rawData = Storage::disk('google') -> get($file['path']);
+        $rawData = Storage::disk('google_image') -> get($file['path']);
         // logger($rawData);
         return response($rawData, 200)
                 ->header('Content-Type', $file['mimetype'])

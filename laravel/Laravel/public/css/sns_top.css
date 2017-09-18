@@ -46,13 +46,29 @@ textarea{
 	margin-bottom: 5px;
 }
 
+/* .row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+} */
+.panel {
+    height: 100%;
+  }
+
+ .labelNew{
+ 	position: relative;
+ 	top: -1px;
+ }
+
+
 .task-List{
 	/*position: relative;*/
 }
 
 .noImage{
-	height: 60px;
-	/*width: 99px;*/
+	height: 59px;
+	/* width: 99px; */
 }
 
 .create-Data{

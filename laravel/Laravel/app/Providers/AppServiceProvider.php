@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Blade::directive('loadLocalCSS', function($filePath) {
+            $path = base_path() . "/public". $filePath;
+            return "<link rel=\"stylesheet\" href=\"" . $filePath . "?date=" . "<?php echo \File::lastModified(\"" . $path . "\") ?>" . "\">";
+        });
+        Blade::directive('loadLocalJS', function($filePath) {
+            $path = base_path() . "/public" . $filePath;
+            return "<script src=\"" . $filePath . "?date=" . "<?php echo \File::lastModified(\"" . $path . "\") ?>" . "\"></script>";
+        });
     }
 
     /**

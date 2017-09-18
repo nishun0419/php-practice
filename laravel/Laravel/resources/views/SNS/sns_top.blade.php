@@ -74,13 +74,13 @@
 								@endif
 							@endforeach
 							@if(!$flag)
-								<span class="label label-danger">New</span>
+								<span class="label label-danger labelNew">New</span>
 							@endif
 							@php
 								$flag = false;
 							@endphp
 						@else
-							<span class="label label-danger">New</span>
+							<span class="label label-danger labelNew">New</span>
 						@endif
 						<a href="/SNS/detail?id={{ $val -> id }}" class="{{ $val -> security == true ?
 							'titlePublic' : 'titlePrivate' }}">
@@ -99,7 +99,7 @@
 								@empty($val -> image_url[$i])
 									@break
 								@endempty
-								<img src = "{{ url('SNS/image/'. $val -> image_url[$i]) }}" height="70", width="100">
+								<img src = "{{ url('SNS/image/'. $val -> id. '/'. $val -> image_url[$i]) }}" height="70", width="100">
 							@endfor
 						@else
 							<div class="noImage"></div>

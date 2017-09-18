@@ -16,8 +16,8 @@
 					<p>
 						@isset($images)
 							@for($i = 0; $i < count($images); $i++)
-								<a href="{{ url('SNS/image/'. $images[$i]) }}" rel="lightbox[set]">
-								<img src="{{ url('SNS/image/'. $images[$i]) }}" width="256" />
+								<a href="{{ url('SNS/image/'. $images[$i].'/'.$data -> id) }}" rel="lightbox[set]">
+								<img src="{{ url('SNS/image/'. $images[$i].'/'.$data -> id) }}" width="256" />
 							</a>
 							@endfor
 						@endisset
