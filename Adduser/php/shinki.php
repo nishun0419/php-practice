@@ -22,15 +22,17 @@
 				$sql = "insert into user (userid, password) values(? , ?)";
 				$stmt = $dbh -> prepare($sql);
 				$stmt -> bindValue(1 , htmlspecialchars($_POST['id']), PDO::PARAM_STR);
-				$stmt -> bindValue(2 , htmlspecialchars($_POST['password']), PDO::PARAM_STR);
+				$stmt -> bindValue(2 , password_hash(htmlspecialchars($_POST['password']),PASSWORD_DEFAULT), PDO::PARAM_STR);
 				$stmt -> execute();
 				$_SESSION["userid"] = $_POST["id"];
-				$_SESSIOM["password"] = $_POST["password"];
+				$_SESSION["password"] = $_POST["password"];
+				unset($_SESSION["message_Shinki"]);
 				header("Location: login.php");
 				exit;
 			}
 			else{
-				print "このユーザーIDはもう使われています。";
+				$_SESSION['message_Shinki'] = "入力したユーザーIDはすでに使われております。";
+				header("Location: ../shinki.php");
 			}
 
 			$dbh = null;

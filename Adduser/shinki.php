@@ -6,6 +6,12 @@
 </head>
 <body>
 	<h1>新規登録</h1>
+	<?php
+		session_start(); 
+		if(isset($_SESSION['message_Shinki'])) {
+			print $_SESSION['message_Shinki'];
+		} 	
+	?>
 	<form method="POST" action="php/shinki.php">
 		<table border="1">
 			<tr>

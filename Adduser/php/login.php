@@ -6,6 +6,8 @@
 </head>
 <body>
 	<?php 
+		// require 'password.php';
+
 		session_start();
 		if(!isset($_SESSION["userid"]) && empty($_POST["id"]) && empty($_POST["password"])){
 			header("Location: ../login.html");
@@ -19,18 +21,23 @@
 					$dbh = new PDO($dsn, $user, $password);
 					print "接続に成功しました。<br>";
 
-					$sql = "select * from user where userid = ? && password = ?";
+					$sql = "select * from user where userid = ?";
 					$stmt = $dbh -> prepare($sql);
 					$stmt -> bindValue(1, htmlspecialchars($_POST['id']),PDO::PARAM_STR);
-					$stmt -> bindValue(2, $_POST['password'], PDO::PARAM_STR);
 					$stmt -> execute();
 					$row = $stmt -> fetch(PDO::FETCH_ASSOC);
 					if($row){
-						$_SESSION["userid"] = $row["userid"];
-						$_SESSION["password"] = $row["password"];
+						if(password_verify(htmlspecialchars($_POST['password']),$row['password'])){
+							$_SESSION['userid'] = $row['userid'];
+							$_SESSION['password'] = $row['password'];
+						}
+						else{
+							print "パスワードが違います";
+							exit;
+						}
 					}
 					else{
-						print "ユーザーID、パスワードが違います。<br>";
+						print "ユーザーIDが違います<br>";
 						exit;
 					}
 
