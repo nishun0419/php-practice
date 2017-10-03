@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>ログイン</title>
-</head>
-<body>
-	<?php
-		session_start(); 
+<?hh
+		session_start();
+		if(trim($_POST["id"]) == false){
+			$_SESSION['message_Shinki'] = "IDを入力してください";
+		}
+		elseif(strpos($_POST["id"]," ") !== false || strpos($_POST["id"],"　") !== false){
+			$_SESSION['message_Shinki'] = "スペースがないidを入力をしてください";
+		}
+		elseif(empty($_POST["password"])){
+			$_SESSION['message_Shinki'] = "パスワードを入力してください";
+		}
+
+		if(isset($_SESSION['message_Shinki'])){
+			header('Location: ../shinki.php');
+			exit;
+		}
+
 		$dsn ="mysql:dbname=SNS;host=localhost;charset=utf8";
 		$user = "nise";
 		$password = "nise";
 		try{
 			$dbh = new PDO($dsn, $user, $password);
-			print "接続に成功しました。<br>";
+			print "接続に成功しました。";
 
 			$sql = "select * from user where userid = ?";
 			$stmt = $dbh -> prepare($sql);
@@ -39,6 +47,3 @@
 		}catch(PDOException $e){
 			print "error";
 		}
-	?>
-</body>
-</html>

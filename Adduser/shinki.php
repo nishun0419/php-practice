@@ -10,9 +10,10 @@
 		session_start(); 
 		if(isset($_SESSION['message_Shinki'])) {
 			print $_SESSION['message_Shinki'];
+			unset($_SESSION['message_Shinki']);
 		} 	
 	?>
-	<form method="POST" action="php/shinki.php">
+	<form method="POST" action="php/shinki.hh">
 		<table border="1">
 			<tr>
 				<td>ユーザーID</td>
