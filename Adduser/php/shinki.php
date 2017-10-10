@@ -13,7 +13,7 @@
 			unset($_SESSION['message_Shinki']);
 		} 	
 	?>
-	<form method="POST" action="php/shinki.hh">
+	<form method="POST" action="../hack/shinki.hh">
 		<table border="1">
 			<tr>
 				<td>ユーザーID</td>

@@ -11,7 +11,7 @@
 		}
 
 		if(isset($_SESSION['message_Shinki'])){
-			header('Location: ../shinki.php');
+			header('Location: ../php/shinki.php');
 			exit;
 		}
 
@@ -35,12 +35,12 @@
 				$_SESSION["userid"] = $_POST["id"];
 				$_SESSION["password"] = $_POST["password"];
 				unset($_SESSION["message_Shinki"]);
-				header("Location: login.php");
+				header("Location: ../php/mypage.php");
 				exit;
 			}
 			else{
 				$_SESSION['message_Shinki'] = "入力したユーザーIDはすでに使われております。";
-				header("Location: ../shinki.php");
+				header("Location: ../php/shinki.php");
 			}
 
 			$dbh = null;

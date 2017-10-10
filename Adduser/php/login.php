@@ -5,50 +5,26 @@
 	<title>ログイン</title>
 </head>
 <body>
-	<?php 
-		// require 'password.php';
-
+	<h1>ログイン画面</h1>
+	<?php
 		session_start();
-		if(!isset($_SESSION["userid"]) && empty($_POST["id"]) && empty($_POST["password"])){
-			header("Location: ../login.html");
-			exit;
+		if(isset($_SESSION['message_Login'])){
+			print $_SESSION['message_Login'];
+			unset($_SESSION['message_Login']);
 		}
-		elseif(!isset($_SESSION["userid"]) && !empty($_POST["id"]) && !empty($_POST["password"])){
-				$dsn ="mysql:dbname=SNS;host=localhost;charset=utf8";
-				$user = "nise";
-				$password = "nise";
-				try{
-					$dbh = new PDO($dsn, $user, $password);
-					print "接続に成功しました。<br>";
-
-					$sql = "select * from user where userid = ?";
-					$stmt = $dbh -> prepare($sql);
-					$stmt -> bindValue(1, htmlspecialchars($_POST['id']),PDO::PARAM_STR);
-					$stmt -> execute();
-					$row = $stmt -> fetch(PDO::FETCH_ASSOC);
-					if($row){
-						if(password_verify(htmlspecialchars($_POST['password']),$row['password'])){
-							$_SESSION['userid'] = $row['userid'];
-							$_SESSION['password'] = $row['password'];
-						}
-						else{
-							print "パスワードが違います";
-							exit;
-						}
-					}
-					else{
-						print "ユーザーIDが違います<br>";
-						exit;
-					}
-
-					$dbh = null;
-				}catch(PDOException $e){
-					print "error";
-				}
-		}
-		print "ようこそ".$_SESSION['userid']."さん<br>";
-		print "パスワードは".$_SESSION['password']."です。<br>";
 	?>
-	<a href="logout.php">ログイン画面に戻る</a>
+	<form method="POST" action="../hack/login.hh">
+		<table border="1">
+			<tr>
+				<td>ユーザーID</td>
+				<td><input type="text" name="id"></td>
+			<tr>
+			</tr>
+				<td>パスワード</td>
+				<td><input type="password" name="password"></td>
+			</tr>
+		</table>
+		<input type="submit">
+	</form>
 </body>
 </html>
