@@ -8,6 +8,10 @@
 	<h1>ログイン画面</h1>
 	<?php
 		session_start();
+		if(isset($_SESSION['userid'])){
+			header("Location: mypage.php");
+			exit;
+		}
 		if(isset($_SESSION['message_Login'])){
 			print $_SESSION['message_Login'];
 			unset($_SESSION['message_Login']);
