@@ -1,9 +1,19 @@
 <?hh
 			session_start();
-		if(!isset($_SESSION["userid"]) && empty($_POST["id"]) && empty($_POST["password"])){
-			header("Location: ../php/login.php");
-			exit;
-		}
+			if(trim($_POST["id"]) == false){
+				$_SESSION['message_Login'] = "IDを入力してください";
+			}
+			elseif(strpos($_POST["id"]," ") !== false || strpos($_POST["id"],"　") !== false){
+				$_SESSION['message_Login'] = "スペースがないidを入力をしてください";
+			}
+			elseif(empty($_POST["password"])){
+				$_SESSION['message_Login'] = "パスワードを入力してください";
+			}
+
+			if(isset($_SESSION['message_Login'])){
+				header('Location: ../php/login.php');
+				exit;
+			}
 		elseif(!isset($_SESSION["userid"]) && !empty($_POST["id"]) && !empty($_POST["password"])){
 				$dsn ="mysql:dbname=SNS;host=localhost;charset=utf8";
 				$user = "nise";
