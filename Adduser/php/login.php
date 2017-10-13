@@ -10,29 +10,36 @@
 <body>
 	<?php
 		require('navbar.php');
-
 		// session_start();
 		if(isset($_SESSION['userid'])){
 			header("Location: mypage.php");
 			exit;
 		}
-		if(isset($_SESSION['message_Login'])){
-			print $_SESSION['message_Login'];
-			unset($_SESSION['message_Login']);
-		}
 	?>
-	<form method="POST" action="../hack/login.hh">
-		<table border="1">
-			<tr>
-				<td>ユーザーID</td>
-				<td><input type="text" name="id"></td>
-			<tr>
-			</tr>
-				<td>パスワード</td>
-				<td><input type="password" name="password"></td>
-			</tr>
-		</table>
-		<input type="submit">
-	</form>
+	<div class="container">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="col-md-6 col-md-offset-4">
+			<?php
+			if(isset($_SESSION['message_Login'])){
+				print "<span class='help-block'><strong>". $_SESSION['message_Login']. "</strong></span>";
+				unset($_SESSION['message_Login']);
+			}
+			?>
+			<form method="POST" action="../hack/login.hh">
+				<table border="1">
+					<tr>
+						<td>ユーザーID</td>
+						<td><input type="text" name="id"></td>
+					</tr>
+					<tr>
+						<td>パスワード</td>
+						<td><input type="password" name="password"></td>
+					</tr>
+				</table>
+				<input type="submit">
+			</form>
+		</div>
+		</div>
+	</div>
 </body>
 </html>
