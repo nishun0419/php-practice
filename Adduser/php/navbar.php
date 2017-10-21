@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-static-top">
-	<div class="container-fluid">
+	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample7">
 				<span class="sr-only">Toggle navigation</span>
@@ -12,26 +12,30 @@
 			</a>
 		</div>
 		
-		<div class="collapse navbar-collapse" id="navbarEexample7">
+		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				&nbsp;
 			</ul>
 
-			<p class="navbar-text navbar-right">
-				ようこそ 
-				<a href="#" class="navbar-link">
-				<?php
-					session_start();
-					if(isset($_SESSION['userid'])){
-						print $_SESSION['userid'];
-					}  
-					else{
-						print "ゲスト";
-					}
-				?>
-				</a> 
-				さん。
-			</p>
+			<ul class="nav navbar-nav navbar-right">
+			<?php 
+				session_start();
+				if(isset($_SESSION["userid"])){ 
+			?>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><?php echo $_SESSION["userid"]."さま"; ?> <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="../hack/logout.hh">ログアウト</a></li>
+						<li><a href="#">リング</a></li>							
+						<li><a href="#">リンク・リストＤ３</a></li>
+					</ul>
+				</li>
+			<?php }else{?>
+				<li>
+					<a href="login.php" role="button">ログイン</a>
+				</li>
+			<?php } ?>
+			</ul>
 		</div>
 	</div>
 </nav>

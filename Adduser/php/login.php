@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ログイン</title>
-	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </head>
