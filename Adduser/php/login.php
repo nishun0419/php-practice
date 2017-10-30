@@ -18,8 +18,9 @@
 		}
 	?>
 	<div class="container">
+		<div class="text-center"><h3>ログイン</h3></div>
 		<div class="col-md-8 col-md-offset-2">
-			<div class="col-md-6 col-md-offset-4">
+			<div class="col-md-8 col-md-offset-2">
 			<?php
 			if(isset($_SESSION['message_Login'])){
 				print "<span class='help-block'><strong>". $_SESSION['message_Login']. "</strong></span>";

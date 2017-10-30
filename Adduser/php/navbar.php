@@ -31,9 +31,8 @@
 					</ul>
 				</li>
 			<?php }else{?>
-				<li>
-					<a href="login.php" role="button">ログイン</a>
-				</li>
+				<li><a href="login.php" role="button">ログイン</a></li>
+				<li><a href="shinki.php" role="button">新規登録</a></li>
 			<?php } ?>
 			</ul>
 		</div>
