@@ -20,25 +20,39 @@
 	<div class="container">
 		<div class="text-center"><h3>ログイン</h3></div>
 		<div class="col-md-8 col-md-offset-2">
-			<div class="col-md-8 col-md-offset-2">
 			<?php
 			if(isset($_SESSION['message_Login'])){
 				print "<span class='help-block'><strong>". $_SESSION['message_Login']. "</strong></span>";
 				unset($_SESSION['message_Login']);
 			}
 			?>
-			<form method="POST" action="../hack/login.hh">
-				<table border="1">
-					<tr>
-						<td>ユーザーID</td>
-						<td><input type="text" name="id"></td>
-					</tr>
-					<tr>
-						<td>パスワード</td>
-						<td><input type="password" name="password"></td>
-					</tr>
-				</table>
-				<input type="submit">
+			<form class="form-horizontal" role="form" method="POST" action="../hack/login.hh">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						ログイン
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="id" class="col-md-4 control-label">ユーザーID</label>
+							<div class="col-md-6">
+								<input id="id" type="text" class="form-control" name="id" required autofocus>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-md-4 control-label">パスワード</label>
+							<div class="col-md-6">
+								<input id="password" type="password" class="form-control" name="password">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-8 col-md-offset-4">
+								<button type="submit" class="btn btn-primary">
+								ログイン
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</form>
 		</div>
 		</div>
