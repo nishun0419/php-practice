@@ -7,7 +7,7 @@
 			<div class="text-right">
 				投稿日時{{ $data -> created_at }}
 			</div>
-			<div class="panel panel-info">
+			<div class="panel panel{{ $data -> security == true ? ' panel-info' : ' panel-primary' }}">
 				<div class="panel-heading">
 					<h1>{{ $data -> title}}</h1>
 				</div>
@@ -16,8 +16,8 @@
 					<p>
 						@isset($images)
 							@for($i = 0; $i < count($images); $i++)
-								<a href="{{ url('SNS/image/'. $images[$i].'/'.$data -> id) }}" rel="lightbox[set]">
-								<img src="{{ url('SNS/image/'. $images[$i].'/'.$data -> id) }}" width="256" />
+								<a href="{{ url('SNS/image/'. $data -> id.'/'.$images[$i]) }}" rel="lightbox[set]">
+								<img src="{{ url('SNS/image/'. $data -> id.'/'.$images[$i]) }}" width="256" />
 							</a>
 							@endfor
 						@endisset
