@@ -16,9 +16,15 @@
 			header("Location: login.php");
 			exit;
 		}
-		print $_SESSION['userid']."<br>";
-		print $_SESSION['password'];
+		else{
+			$message = file_get_contents("../hack/messageBord.hh");
+			foreach ($message as $val) {
+				print $val -> title;
+				print $val -> message;
+			}
+		}
 	?>
+
 	<a href="../hack/logout.hh">ログアウト</a>
 </body>
 </html>
