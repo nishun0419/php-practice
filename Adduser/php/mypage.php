@@ -17,7 +17,24 @@
 			exit;
 		}
 		else{
-			$message = file_get_contents("../hack/messageBord.hh");
+			// $header = array(
+			// 	'Content-Type: application/x-www-form-urlencoded',
+			// 	'Content-Length: 20');
+
+			// $options = array('http' =>
+			// 	array(
+			// 		"method" => "GET",
+			// 		"header" => implode("\r\n",$header)
+			// 	)
+			// );
+			$c = curl_init("../hack/messageBord.hh");
+			curl_setopt($c,CURLOPT_GET,TRUE);
+			$message = curl_exec($c);
+			if($message == null){
+				print aaa;
+			}
+
+			// $message = file_get_contents("../hack/messageBord.hh",false, stream_context_create($options));
 			foreach ($message as $val) {
 				print $val -> title;
 				print $val -> message;

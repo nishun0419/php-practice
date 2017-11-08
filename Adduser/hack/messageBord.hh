@@ -10,7 +10,7 @@
 	try{
 		$dbh = new PDO($dsn,$user,$password);
 
-		$sql = "select * from messagebords where userid=?"
+		$sql = "select * from messagebords where userid=?";
 		$stmt = $dbh -> prepare($sql);
 		$stmt -> bindValue(1, $_SESSION["userid"], PDO::PARAM_STR);
 		$stmt -> execute();
@@ -18,8 +18,8 @@
 		$row = $stmt -> fetch(PDO::FETCH_ASSOC);
 		while($row){
 			$userdata[] = array(
-				"title" => $row["title"]
-				"message" => $row["message"]
+				"title" => $row["title"],
+				"message" => $row["message"],
 				"posttime" => $row["posttime"]
 			);
 		}
