@@ -32,8 +32,8 @@
 				$stmt -> bindValue(1 , htmlspecialchars($_POST['id']), PDO::PARAM_STR);
 				$stmt -> bindValue(2 , password_hash(htmlspecialchars($_POST['password']),PASSWORD_DEFAULT), PDO::PARAM_STR);
 				$stmt -> execute();
-				$_SESSION["userid"] = $_POST["id"];
-				$_SESSION["password"] = $_POST["password"];
+				$_SESSION["userid"] = htmlspecialchars($_POST["id"]);
+				$_SESSION["password"] = htmlspecialchars($_POST["password"]);
 				unset($_SESSION["message_Shinki"]);
 				header("Location: ../php/mypage.php");
 				exit;
