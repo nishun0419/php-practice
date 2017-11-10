@@ -27,18 +27,24 @@
 			// 		"header" => implode("\r\n",$header)
 			// 	)
 			// );
-			$c = curl_init("../hack/messageBord.hh");
-			curl_setopt($c,CURLOPT_GET,TRUE);
-			$message = curl_exec($c);
-			if($message == null){
-				print aaa;
-			}
+			// $c = curl_init("../hack/messageBord.hh");
+			// curl_setopt($c,CURLOPT_GET,TRUE);
+			// $message = curl_exec($c);
+			// if($message == null){
+			// 	print aaa;
+			// }
 
-			// $message = file_get_contents("../hack/messageBord.hh",false, stream_context_create($options));
-			foreach ($message as $val) {
-				print $val -> title;
-				print $val -> message;
+			$message = $_SESSION["messagebords"];
+			if($message == null){
+				print "aaa";
 			}
+			else{
+				echo $message;
+			}
+			// foreach ($message as $val) {
+			// 	print $val -> title;
+			// 	print $val -> message;
+			// }
 		}
 	?>
 

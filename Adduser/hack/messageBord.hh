@@ -2,6 +2,7 @@
 	session_start();
 	if(!isset($_SESSION["userid"])){
 		header('Location: ../php/login.php');
+		exit;
 	}
 
 	$dsn = "mysql:dbname=SNS;host=localhost;charset=utf8";
@@ -16,16 +17,29 @@
 		$stmt -> execute();
 		$userdata = array();
 		$row = $stmt -> fetch(PDO::FETCH_ASSOC);
-		while($row){
-			$userdata[] = array(
-				"title" => $row["title"],
-				"message" => $row["message"],
-				"posttime" => $row["posttime"]
-			);
+		if($row){
+			while($result = $stmt -> fetch(PDO::FETCH_ASSOC)){
+				$userdata[] = array(
+					"title" => $result["title"],
+					"message" => $result["message"],
+					"posttime" => $result["posttime"]
+				);
+			}
+			$_SESSION["messagebords"] = $userdata;
+			header("Location: ../php/mypage.php");
+			exit;
 		}
-		return $userdata;
+		else{
+			$userdata = null;
+			$_SESSION["messagebords"] = "失敗";
+			header("Location: ../php/mypage.php");
+			exit;
+		}
+		$dbh = null;
 	}catch(PDOException $e){
-		$userdata = $e;
+		header("Location: ../php/login.php");
+		exit;
 	}finally{
-		return $userdata;
+		header("Location: ../php/login.php");
+		exit;
 	}
