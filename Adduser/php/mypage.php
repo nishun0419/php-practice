@@ -28,13 +28,12 @@
 			// 	)
 			// );
 			// $c = curl_init("../hack/messageBord.hh");
-			// curl_setopt($c,CURLOPT_GET,TRUE);
-			// $message = curl_exec($c);
-			// if($message == null){
-			// 	print aaa;
-			// }
+			// curl_setopt($c, CURLOPT_CUSTOMREQUEST , 'GET');
+			// curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false); // 証明書の検証を行わない
+			// curl_setopt($c, CURLOPT_RETURNTRANSFER, true); // レスポンスを文字列で受け取る
+			// curl_exec($c);
 
-			$message = $_SESSION["messagebords"];
+			$message = file_get_contents("../hack/messageBord.hh");
 			if($message == null){
 				print "aaa";
 			}

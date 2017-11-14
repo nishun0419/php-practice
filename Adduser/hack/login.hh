@@ -47,5 +47,6 @@
 				}catch(PDOException $e){
 				}		
 		}
-		header("Location: messageBord.hh");
+		header("Location: ../php/mypage.php");
 		exit;
+

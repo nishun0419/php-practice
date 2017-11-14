@@ -1,6 +1,6 @@
 <?hh
 	session_start();
-	if(!isset($_SESSION["userid"])){
+	if(!isset($_SESSION["message_Login"])){
 		header('Location: ../php/login.php');
 		exit;
 	}
@@ -11,9 +11,9 @@
 	try{
 		$dbh = new PDO($dsn,$user,$password);
 
-		$sql = "select * from messagebords where userid=?";
+		$sql = "select * from messagebords where userid = ?";
 		$stmt = $dbh -> prepare($sql);
-		$stmt -> bindValue(1, $_SESSION["userid"], PDO::PARAM_STR);
+		$stmt -> bindValue(1, $_SESSION["userid"],PDO::PARAM_STR);
 		$stmt -> execute();
 		$userdata = array();
 		$row = $stmt -> fetch(PDO::FETCH_ASSOC);
@@ -25,21 +25,18 @@
 					"posttime" => $result["posttime"]
 				);
 			}
-			$_SESSION["messagebords"] = $userdata;
-			header("Location: ../php/mypage.php");
+			// $_SESSION["messagebords"] = $userdata;
+			// header("Location: ../php/mypage.php");
+			echo $userdata;
 			exit;
 		}
 		else{
 			$userdata = null;
-			$_SESSION["messagebords"] = "失敗";
-			header("Location: ../php/mypage.php");
+			// $_SESSION["messagebords"] = "失敗";
+			// header("Location: ../php/mypage.php");
 			exit;
 		}
 		$dbh = null;
 	}catch(PDOException $e){
-		header("Location: ../php/login.php");
-		exit;
-	}finally{
-		header("Location: ../php/login.php");
-		exit;
+
 	}
