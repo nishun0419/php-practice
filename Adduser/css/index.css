@@ -9,7 +9,7 @@ body{
 
 #animation_back{
 	position: fixed;
-	background-color: #FFFFFF;
+	background-color: #000000;
 	height: 100%;
 	width: 100%;
 	top:0;
@@ -63,7 +63,7 @@ body{
 	background-position: center;
 	background-attachment: fixed;
 	background-size: cover;
-	background-image: url(../image/title.jpg);
+	background-image: url(../image/titleback.jpg);
 	/* padding-top: 60px;
 	/* margin-top: -60px; */
 }

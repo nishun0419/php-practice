@@ -16,6 +16,7 @@
 　　　<script type="text/javascript" src="js/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
 	 <script type="text/javascript" src="js/scrollmagic/uncompressed/plugins/animation.velocity.js"></script>
 	 <script type="text/javascript" src="js/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+	 <script type="text/javascript" src="js/snowfall.jquery.js"></script>
 	<title>Titlee</title>
 <script type="text/javascript">
 	var controller = new ScrollMagic.Controller({
@@ -140,5 +141,6 @@
  					.addTo(controller);
 </script>
 <script type="text/javascript" src="js/texteffect.js"></script>
+<script type="text/javascript" src="js/snowfall.js"></script>
 </body>
 </html>
