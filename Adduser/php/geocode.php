@@ -14,5 +14,5 @@ function get_gps_from_address( $address='' ){
     return $res;
 }
 
-$latlng = get_gps_from_address('島根県出雲市万田町666');
+$latlng = get_gps_from_address('東京都新宿区西新宿２丁目８−１');
 print_r($latlng);
