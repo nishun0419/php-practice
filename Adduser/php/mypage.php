@@ -12,11 +12,13 @@
 	<?php
 		require('navbar.php');
 		// session_start();
+		echo "aaaa";
 		if(!isset($_SESSION["userid"])){
 			header("Location: login.php");
 			exit;
 		}
 		else{
+			print "aaaa";
 			// $header = array(
 			// 	'Content-Type: application/x-www-form-urlencoded',
 			// 	'Content-Length: 20');
@@ -32,14 +34,9 @@
 			// curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false); // 証明書の検証を行わない
 			// curl_setopt($c, CURLOPT_RETURNTRANSFER, true); // レスポンスを文字列で受け取る
 			// curl_exec($c);
-
-			$message = file_get_contents("../hack/messageBord.hh");
-			if($message == null){
-				print "aaa";
-			}
-			else{
-				echo $message;
-			}
+				$opt = array("http" => array('ignore_errors' => true));
+				$messages = json_decode(file_get_contents("../hack/messageBord.hh",false, stream_context_create($opt)));
+				var_dump($messages);
 			// foreach ($message as $val) {
 			// 	print $val -> title;
 			// 	print $val -> message;

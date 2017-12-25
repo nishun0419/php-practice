@@ -1,9 +1,9 @@
 <?hh
 	session_start();
-	if(!isset($_SESSION["message_Login"])){
-		header('Location: ../php/login.php');
-		exit;
-	}
+	// if(!isset($_SESSION["message_Login"])){
+	// 	header('Location: ../php/login.php');
+	// 	exit;
+	// }
 
 	$dsn = "mysql:dbname=SNS;host=localhost;charset=utf8";
 	$user = "nise";
@@ -18,25 +18,29 @@
 		$userdata = array();
 		$row = $stmt -> fetch(PDO::FETCH_ASSOC);
 		if($row){
-			while($result = $stmt -> fetch(PDO::FETCH_ASSOC)){
+			// while($result = $stmt -> fetch(PDO::FETCH_ASSOC)){
 				$userdata[] = array(
-					"title" => $result["title"],
-					"message" => $result["message"],
-					"posttime" => $result["posttime"]
+					"title" => $row["title"],
+					"message" => $row["message"],
+					"posttime" => $row["posttime"]
 				);
-			}
+			// }
 			// $_SESSION["messagebords"] = $userdata;
 			// header("Location: ../php/mypage.php");
-			echo $userdata;
+			header("Access-Control-Allow-Origin:*");
+			header("Content-Type: application/json");
+			echo json_encode($userdata);
 			exit;
 		}
 		else{
 			$userdata = null;
+			echo "hhh";
 			// $_SESSION["messagebords"] = "失敗";
 			// header("Location: ../php/mypage.php");
 			exit;
 		}
 		$dbh = null;
 	}catch(PDOException $e){
+		echo $e;
 
 	}
