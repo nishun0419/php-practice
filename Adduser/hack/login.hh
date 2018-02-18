@@ -1,5 +1,5 @@
 <?hh
-			session_start();
+//コメントテスト
 			if(trim($_POST["id"]) == false){
 				$_SESSION['message_Login'] = "IDを入力してください";
 			}
