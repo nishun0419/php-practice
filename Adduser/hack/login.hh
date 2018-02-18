@@ -15,7 +15,7 @@
 				exit;
 			}
 		elseif(!isset($_SESSION["userid"]) && !empty($_POST["id"]) && !empty($_POST["password"])){
-				$dsn ="mysql:dbname=SNS;host=localhost;charset=utf8";
+				$dsn ="mysql:dbname=SNS;host=mysql-server.ch4chqwtewtw.us-east-2.rds.amazonaws.com;charset=utf8";
 				$user = "nise";
 				$password = "nise";
 				try{
@@ -28,25 +28,21 @@
 					$row = $stmt -> fetch(PDO::FETCH_ASSOC);
 					if($row){
 						if(password_verify(htmlspecialchars($_POST['password']),$row['password'])){
-							$_SESSION['userid'] = $row['userid'];
-							$_SESSION['password'] = $row['password'];
+							$resMes['userid'] = $row['userid'];	
+							$resMes['password'] = $row['password'];
 						}
 						else{
-							$_SESSION['message_Login'] = "パスワードが違います";
-							header("Location: ../php/login.php");
-							exit;
+							$resMes['error'] = "passerror";
 						}
 					}
+				
 					else{
-						$_SESSION['message_Login'] = "ユーザーIDが違います";
-						header("Location: ../php/login.php");
-						exit;
+						$resMes['error'] = "loginerror";
 					}
 
 					$dbh = null;
 				}catch(PDOException $e){
-				}		
+				}
+			echo json_encode($resMes);		
 		}
-		header("Location: ../php/mypage.php");
-		exit;
-
+exit;

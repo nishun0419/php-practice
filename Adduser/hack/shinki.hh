@@ -15,7 +15,7 @@
 			exit;
 		}
 
-		$dsn ="mysql:dbname=SNS;host=localhost;charset=utf8";
+		$dsn ="mysql:dbname=SNS;host=mysql-server.ch4chqwtewtw.us-east-2.rds.amazonaws.com;charset=utf8";
 		$user = "nise";
 		$password = "nise";
 		try{
